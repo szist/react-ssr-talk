@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-slide-content {
+        font-size: 32px;
+      }
+      .remark-slide-number {
+        font-size: 18px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .italic {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Server-side rendering for React
+
+---
+
+# Agenda
+
+1. What is that?
+4. Why not?
+2. Why?
+3. How?
+
+---
+
+# Modern web?
+
+.center[![web](./images/modern_web.gif)]
+
+---
+
+# Modern web
+
+.center[![web](./images/modern_web_actually.gif)]
+
+???
+Javascript paratko.
+
+---
+
+# TODO simple react without SSR
+
+---
+
+# Why not?
+
+**SEO** - from google guidelines:
+_"The Google indexing system renders a web page
+as the user would see it, including images, CSS, and
+JavaScript files."_ [link](https://support.google.com/webmasters/answer/35769?hl=en)
+
+Search Console - **Fetch as Google** [link](https://support.google.com/webmasters/answer/6066468?visit_id=1-636592885515277953-4188022132&rd=1)
+
+* TODO show the example *
+
+---
+
+# Why then?
+
+* OpenGraph bots - baaad
+
+--
+* Time-to Interactive
+
+--
+ * Slow connections - bundle size
+
+--
+ * Mobile devices - slow connections
+
+--
+
+## Progressive Web Apps?
+
+--
+.right[![magic](./images/magic.gif)]
+
+???
+PWA usually just fancy word for having a service-worker to have full control over caching.
+
+---
+class: center, middle
+# Thank you !
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>

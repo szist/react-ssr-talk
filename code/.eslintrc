@@ -1,0 +1,31 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "prettier",
+    "prettier/react",
+    "prettier/standard"
+  ],
+  "globals": {
+    "__DEV__": true,
+    "window": true
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "plugins": ["babel", "react", "prettier", "standard"],
+  "rules": {
+    "react/prop-types": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["./app/"]
+      }
+    }
+  }
+}
