@@ -1,28 +1,28 @@
-import * as React from "react";
-import RedBox from "redbox-react";
+import * as React from 'react'
+import RedBox from 'redbox-react'
 
 function RedBoxError({ error, info }) {
   const redBoxStyle = {
     redbox: {
-      position: "fixed",
+      position: 'fixed',
       padding: 10,
-      top: "0px",
-      left: "0px",
-      bottom: "0px",
-      width: "50%",
-      background: "rgb(204, 0, 0)",
-      color: "white",
-      overflow: "auto"
+      top: '0px',
+      left: '0px',
+      bottom: '0px',
+      width: '50%',
+      background: 'rgb(204, 0, 0)',
+      color: 'white',
+      overflow: 'auto'
     }
-  };
+  }
   const componentInfoStyle = {
-    position: "fixed",
+    position: 'fixed',
     top: 0,
     right: 0,
-    left: "50%",
+    left: '50%',
     bottom: 0,
-    overflow: "auto"
-  };
+    overflow: 'auto'
+  }
 
   return (
     <div>
@@ -31,7 +31,7 @@ function RedBoxError({ error, info }) {
         <pre>{info.componentStack}</pre>
       </div>
     </div>
-  );
+  )
 }
 
-export default RedBoxError;
+export default RedBoxError

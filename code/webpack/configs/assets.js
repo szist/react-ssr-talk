@@ -1,13 +1,13 @@
 export default function assets({ target }) {
-  const emitFile = target !== "node";
+  const emitFile = target !== 'node'
 
   const withLimit = limit => ({
-    loader: "url-loader",
+    loader: 'url-loader',
     options: {
       limit,
       emitFile
     }
-  });
+  })
 
   return {
     module: {
@@ -26,5 +26,5 @@ export default function assets({ target }) {
         }
       ]
     }
-  };
+  }
 }

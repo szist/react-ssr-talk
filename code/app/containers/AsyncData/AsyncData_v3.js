@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import Metadata from 'components/Metadata'
 import Loading from 'components/Loading'
 
@@ -14,8 +15,27 @@ function loadAsyncData() {
 }
 
 class AsyncData extends React.PureComponent {
-  state = {
-    data: null
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: null
+    }
+    this.bootstrap()
+  }
+
+  static KEY = Symbol('AsyncData')
+
+  bootstrap() {
+    const { staticContext } = this.props
+    if (staticContext) {
+      const { [AsyncData.KEY]: data = null } = staticContext.data
+      if (data) {
+        // eslint-disable-next-line
+        this.state.data = data
+      } else {
+        staticContext.bootstrap.push([AsyncData.KEY, loadAsyncData()])
+      }
+    }
   }
 
   componentDidMount() {
@@ -38,4 +58,4 @@ class AsyncData extends React.PureComponent {
   }
 }
 
-export default AsyncData
+export default withRouter(AsyncData)

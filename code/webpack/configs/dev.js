@@ -1,26 +1,26 @@
-import { HotModuleReplacementPlugin, LoaderOptionsPlugin } from "webpack";
+import { HotModuleReplacementPlugin, LoaderOptionsPlugin } from 'webpack'
 
 export default function dev({ target, mode, hot }) {
   return {
-    mode: mode === "staging" ? "production" : mode,
-    devtool: mode === "development" ? "cheap-module-source-map" : "",
+    mode: mode === 'staging' ? 'production' : mode,
+    devtool: mode === 'development' ? 'cheap-module-source-map' : '',
     plugins: [
-      ...(target === "web" && hot ? [new HotModuleReplacementPlugin()] : []),
+      ...(target === 'web' && hot ? [new HotModuleReplacementPlugin()] : []),
       // NOTE: workaround for webpack v4 for eslint-loader
-      ...(mode === "development" ? [new LoaderOptionsPlugin({ options: {} })] : [])
+      ...(mode === 'development' ? [new LoaderOptionsPlugin({ options: {} })] : [])
     ],
     module: {
       rules:
-        mode === "development"
+        mode === 'development'
           ? [
               {
-                enforce: "pre",
+                enforce: 'pre',
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "eslint-loader"
+                loader: 'eslint-loader'
               }
             ]
           : []
     }
-  };
+  }
 }

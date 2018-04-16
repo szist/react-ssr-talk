@@ -3,12 +3,12 @@ export default function optimization({ target }) {
     optimization: {
       splitChunks: {
         cacheGroups: {
-          ...(target === "web"
+          ...(target === 'web'
             ? {
                 vendor: {
-                  chunks: "initial",
-                  name: "vendor",
-                  test: "vendor",
+                  chunks: 'initial',
+                  name: 'vendor',
+                  test: 'vendor',
                   enforce: true
                 }
               }
@@ -16,5 +16,5 @@ export default function optimization({ target }) {
         }
       }
     }
-  };
+  }
 }

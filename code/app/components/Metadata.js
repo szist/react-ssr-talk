@@ -1,7 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 
-const Metadata = ({title, description, image}) => (
+const Metadata = ({ title, description, image }) => (
   <Helmet>
     <title>{`${title} | SSR talk`}</title>
     <meta property="og:title" content={title} />

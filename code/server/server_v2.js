@@ -3,7 +3,7 @@ import '@babel/polyfill'
 import express from 'express'
 import log from 'fancy-log'
 import path from 'path'
-import render from './render'
+import render from './render_v2'
 import { port } from './config'
 
 const app = express()

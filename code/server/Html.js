@@ -1,16 +1,15 @@
-import React from "react";
+import React from 'react'
 import Helmet from 'react-helmet'
 
 const Html = ({ assets, initialState, body }) => {
   const appState = {
     __html: `
       window.INITIAL_STATE = ${JSON.stringify(initialState)}`
-  };
+  }
 
-  
-  const head = Helmet.renderStatic();
-  const htmlAttrs = head.htmlAttributes.toComponent();
-  const bodyAttrs = head.bodyAttributes.toComponent();
+  const head = Helmet.renderStatic()
+  const htmlAttrs = head.htmlAttributes.toComponent()
+  const bodyAttrs = head.bodyAttributes.toComponent()
 
   return (
     <html lang="en" {...htmlAttrs}>
@@ -32,7 +31,7 @@ const Html = ({ assets, initialState, body }) => {
         {assets.js.map(asset => <script src={asset} key={asset} />)}
       </body>
     </html>
-  );
-};
+  )
+}
 
-export default Html;
+export default Html

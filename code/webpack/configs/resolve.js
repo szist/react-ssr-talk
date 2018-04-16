@@ -1,5 +1,5 @@
 export default {
   resolve: {
-    modules: ["node_modules", "app"]
+    modules: ['node_modules', 'app']
   }
-};
+}

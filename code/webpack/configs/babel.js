@@ -3,27 +3,27 @@ export default function babel({ mode }) {
     module: {
       rules: [
         {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           test: /\.js$/,
           exclude: /node_modules/,
           options: {
             presets: [
-              ["@babel/preset-env", { modules: false }],
-              "@babel/preset-react",
-              "@babel/preset-stage-3"
+              ['@babel/preset-env', { modules: false }],
+              '@babel/preset-react',
+              '@babel/preset-stage-3'
             ],
             plugins: [
-              "@babel/plugin-transform-runtime",
-              ...(mode === "development"
+              '@babel/plugin-transform-runtime',
+              ...(mode === 'development'
                 ? []
                 : [
-                    "@babel/plugin-transform-react-constant-elements",
-                    "@babel/plugin-transform-react-inline-elements"
+                    '@babel/plugin-transform-react-constant-elements',
+                    '@babel/plugin-transform-react-inline-elements'
                   ])
             ]
           }
         }
       ]
     }
-  };
+  }
 }

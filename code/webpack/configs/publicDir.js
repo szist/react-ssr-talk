@@ -1,7 +1,7 @@
-import CopyWebpackPlugin from "copy-webpack-plugin";
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 export default function copyPublic({ target, publicDir }) {
   return {
-    plugins: [...(target === "web" ? [new CopyWebpackPlugin([publicDir])] : [])]
-  };
+    plugins: [...(target === 'web' ? [new CopyWebpackPlugin([publicDir])] : [])]
+  }
 }

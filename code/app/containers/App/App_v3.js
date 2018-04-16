@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Route, Switch, NavLink } from 'react-router-dom'
 
 import Simple from 'containers/Simple/Simple'
-import AsyncData from 'containers/AsyncData/AsyncData'
+import AsyncData from 'containers/AsyncData/AsyncData_v3'
 import CodeSplit from 'containers/CodeSplit/CodeSplit'
 
 const App = () => (

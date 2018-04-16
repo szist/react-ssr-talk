@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import App from './containers/App/App'
+import App from './containers/App/App_v3'
 import CatchError from './containers/CatchError'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'

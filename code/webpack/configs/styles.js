@@ -1,32 +1,32 @@
-import ExtractTextPlugin from "extract-text-webpack-plugin";
-import cssnano from "cssnano";
-import OptimizeCssAssetsPlugin from "optimize-css-assets-webpack-plugin";
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import cssnano from 'cssnano'
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 
 export default function styles({ target, mode, hot }) {
   function getLoader() {
     const cssLoader = {
-      loader: `css-loader${target === "node" ? "/locals" : ""}`,
+      loader: `css-loader${target === 'node' ? '/locals' : ''}`,
       options: {
         modules: true,
         localIdentName:
-          mode === "production" ? "[hash:base64]" : "[name]__[local]___[hash:base64:5]",
+          mode === 'production' ? '[hash:base64]' : '[name]__[local]___[hash:base64:5]',
         importLoaders: 1
       }
-    };
-    const fallback = target === "web" ? ["style-loader"] : [];
+    }
+    const fallback = target === 'web' ? ['style-loader'] : []
 
     const styleLoaders = [
       cssLoader,
       // NOTE postcss configs should be in postcss.config.js or in package.json
-      "postcss-loader"
-    ];
+      'postcss-loader'
+    ]
 
     const extractLoaders = ExtractTextPlugin.extract({
       fallback,
       use: styleLoaders
-    });
+    })
 
-    return hot ? ["css-hot-loader", ...extractLoaders] : extractLoaders;
+    return hot ? ['css-hot-loader', ...extractLoaders] : extractLoaders
   }
 
   return {
@@ -41,11 +41,11 @@ export default function styles({ target, mode, hot }) {
     plugins: [
       new ExtractTextPlugin({
         // NOTE temporary fix with contenhash until it's fixed. Maybe switch to MiniCssExtractPlugin
-        filename: mode === "development" ? "[name].css" : "[name].[md5:contenthash:hex:20].css",
+        filename: mode === 'development' ? '[name].css' : '[name].[md5:contenthash:hex:20].css',
         allChunks: true,
-        disable: target === "node"
+        disable: target === 'node'
       }),
-      ...(mode === "development"
+      ...(mode === 'development'
         ? []
         : [
             new OptimizeCssAssetsPlugin({
@@ -59,5 +59,5 @@ export default function styles({ target, mode, hot }) {
             })
           ])
     ]
-  };
+  }
 }

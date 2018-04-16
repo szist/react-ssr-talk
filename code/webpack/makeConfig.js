@@ -1,20 +1,20 @@
-import _ from "lodash";
-import assets from "./configs/assets";
-import babel from "./configs/babel";
-import dev from "./configs/dev";
-import globals from "./configs/globals";
-import output from "./configs/output";
-import publicDir from "./configs/publicDir";
-import resolve from "./configs/resolve";
-import styles from "./configs/styles";
-import entries from "./configs/entries";
-import optimization from "./configs/optimization";
+import _ from 'lodash'
+import assets from './configs/assets'
+import babel from './configs/babel'
+import dev from './configs/dev'
+import globals from './configs/globals'
+import output from './configs/output'
+import publicDir from './configs/publicDir'
+import resolve from './configs/resolve'
+import styles from './configs/styles'
+import entries from './configs/entries'
+import optimization from './configs/optimization'
 
 function concatArrays(objValue, srcValue) {
   if (_.isArray(objValue)) {
-    return objValue.concat(srcValue);
+    return objValue.concat(srcValue)
   }
-  return undefined;
+  return undefined
 }
 
 export default function makeConfig(options) {
@@ -31,5 +31,5 @@ export default function makeConfig(options) {
     publicDir(options),
     optimization(options),
     /* customizer */ concatArrays
-  );
+  )
 }

@@ -1,17 +1,16 @@
-import makeConfig from "./webpack/makeConfig";
-import runDevel from "./webpack/development";
+import makeConfig from './webpack/makeConfig'
+import runDevel from './webpack/development'
 
-import { serverOptions, clientOptions } from "./options";
+import { serverOptions, clientOptions } from './options'
 
-const mode = process.argv.includes("--release") ? "production" : "development";
-const serverConfig = makeConfig({ ...serverOptions, mode });
+const mode = process.argv.includes('--release') ? 'production' : 'development'
+const serverConfig = makeConfig({ ...serverOptions, mode })
 
 // Get the Webpack config (with options)
 const clientConfig = makeConfig({
   ...clientOptions,
-  hot: mode === "development",
+  hot: mode === 'development',
   mode
-});
+})
 
-runDevel(serverConfig, clientConfig);
-
+runDevel(serverConfig, clientConfig)

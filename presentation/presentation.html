@@ -1,32 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Title</title>
-    <meta charset="utf-8">
-    <style>
-      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
-      body { font-family: 'Droid Serif'; }
-      h1, h2, h3 {
-        font-family: 'Yanone Kaffeesatz';
-        font-weight: normal;
-      }
-      .remark-slide-content {
-        font-size: 32px;
-      }
-      .remark-slide-number {
-        font-size: 18px;
-      }
-      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
-      .italic {
-        font-style: italic;
-      }
-    </style>
-  </head>
-  <body>
-    <textarea id="source">
+<head>
+  <title>Title</title>
+  <meta charset="utf-8">
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+    @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+    body {
+      font-family: 'Droid Serif';
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Yanone Kaffeesatz';
+      font-weight: normal;
+    }
+
+    .remark-slide-content {
+      font-size: 32px;
+    }
+
+    .remark-slide-number {
+      font-size: 18px;
+    }
+
+    .remark-code,
+    .remark-inline-code {
+      font-family: 'Ubuntu Mono';
+    }
+
+    .italic {
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+  <textarea id="source">
 
 class: center, middle
 
@@ -71,13 +85,13 @@ JavaScript files."_ [link](https://support.google.com/webmasters/answer/35769?hl
 
 Search Console - **Fetch as Google** [link](https://support.google.com/webmasters/answer/6066468?visit_id=1-636592885515277953-4188022132&rd=1)
 
-* TODO show the example *
+* TODO show the example of v1 live*
 
 ---
 
 # Why then?
 
-* OpenGraph bots - baaad
+* OpenGraph bots - baaad - TODO show example of v1 live on now
 
 --
 * Time-to Interactive
@@ -99,14 +113,27 @@ Search Console - **Fetch as Google** [link](https://support.google.com/webmaster
 PWA usually just fancy word for having a service-worker to have full control over caching.
 
 ---
+
+# Versions
+
+* Version 1 - no SSR
+
+--
+* Version 2 - simple SSR
+
+--
+* Version 3 - using staticContext
+
+--- 
 class: center, middle
 # Thank you !
 
     </textarea>
-    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
-    </script>
-    <script>
-      var slideshow = remark.create();
-    </script>
-  </body>
+  <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+  </script>
+  <script>
+    var slideshow = remark.create();
+  </script>
+</body>
+
 </html>

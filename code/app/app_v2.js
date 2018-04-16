@@ -2,7 +2,7 @@
 import '@babel/polyfill'
 
 import * as React from 'react'
-import { render, hydrate } from 'react-dom'
+import { hydrate } from 'react-dom'
 
 import Root from './root'
 import configureStore from './configureStore'
@@ -15,7 +15,7 @@ const element = document.getElementById('app')
 if (!element) {
   throw new Error("couldn't find element with id app")
 }
-render(app, element)
+hydrate(app, element)
 
 /* eslint-env node */
 if (module.hot && typeof module.hot.accept === 'function') {

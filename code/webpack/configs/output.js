@@ -1,21 +1,18 @@
-import path from "path";
-import nodeExternals from "webpack-node-externals";
-import ManifestPlugin from "webpack-manifest-plugin";
+import path from 'path'
+import nodeExternals from 'webpack-node-externals'
+import ManifestPlugin from 'webpack-manifest-plugin'
 
 export default function output({ target, mode, buildDir }) {
-  const outputPath = path.resolve(
-    buildDir,
-    target === "web" ? "public" : ""
-  );
+  const outputPath = path.resolve(buildDir, target === 'web' ? 'public' : '')
   return {
     target,
-    externals: target === "web" ? [] : [/^\.\/assets$/, nodeExternals(), { newrelic: true }],
+    externals: target === 'web' ? [] : [/^\.\/assets$/, nodeExternals(), { newrelic: true }],
     output: {
       path: outputPath,
-      publicPath: "/",
-      filename: target === "node" || mode === "development" ? "[name].js" : "[name].[hash].js",
-      chunkFilename: mode === "development" ? "[name].js" : "[name].[chunkhash].js",
-      libraryTarget: target === "node" ? "commonjs2" : undefined
+      publicPath: '/',
+      filename: target === 'node' || mode === 'development' ? '[name].js' : '[name].[hash].js',
+      chunkFilename: mode === 'development' ? '[name].js' : '[name].[chunkhash].js',
+      libraryTarget: target === 'node' ? 'commonjs2' : undefined
     },
     node: {
       console: false,
@@ -26,22 +23,22 @@ export default function output({ target, mode, buildDir }) {
       __dirname: false
     },
     optimization: {
-      ...(target === "node" ? { splitChunks: false } : {})
+      ...(target === 'node' ? { splitChunks: false } : {})
     },
     performance: {
-      hints: mode === "development" || target === "node" ? false : "warning",
+      hints: mode === 'development' || target === 'node' ? false : 'warning',
       maxAssetSize: 250000, // 250 kB
       maxEntrypointSize: 500000 // 500 kB
     },
     plugins: [
-      ...(target === "web"
+      ...(target === 'web'
         ? [
             new ManifestPlugin({
-              fileName: path.resolve(outputPath, "../assets.json"),
+              fileName: path.resolve(outputPath, '../assets.json'),
               writeToFileEmit: true
             })
           ]
         : [])
     ]
-  };
+  }
 }

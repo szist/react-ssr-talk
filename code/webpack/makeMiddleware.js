@@ -1,13 +1,13 @@
-import webpack from "webpack";
-import webpackDevMiddleware from "webpack-dev-middleware";
-import webpackHotMiddleware from "webpack-hot-middleware";
-import log from "fancy-log";
+import webpack from 'webpack'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
+import log from 'fancy-log'
 
 export default config => {
   // Set `process.env.NODE_ENV` BEFORE calling the Webpack CLI
-  process.env.NODE_ENV = "development";
+  process.env.NODE_ENV = 'development'
 
-  const bundler = webpack(config);
+  const bundler = webpack(config)
 
   // Run Browsersync and use middleware for Hot Module Replacement
   const devMiddleware = webpackDevMiddleware(bundler, {
@@ -15,9 +15,9 @@ export default config => {
     // provide publicPath by ourselves
     publicPath: config.output.publicPath,
     headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
     },
     stats: {
       // Config for minimal console.log mess.
@@ -36,22 +36,19 @@ export default config => {
     }
     // for other settings:
     // @see https://webpack.js.org/guides/development/#webpack-dev-middleware
-  });
+  })
 
-  const middleware = [
-    devMiddleware,
-    webpackHotMiddleware(bundler)
-  ];
+  const middleware = [devMiddleware, webpackHotMiddleware(bundler)]
 
   return new Promise(resolve => {
-    log("Waiting for the initial frontend webpack build to finish...");
+    log('Waiting for the initial frontend webpack build to finish...')
     devMiddleware.waitUntilValid(stats => {
-      log("Finished the initial frontend build.");
+      log('Finished the initial frontend build.')
       if (stats.hasErrors()) {
-        log("ERROR\n", stats.toString("errors-only"));
+        log('ERROR\n', stats.toString('errors-only'))
       } else {
-        resolve(middleware);
+        resolve(middleware)
       }
-    });
-  });
-};
+    })
+  })
+}

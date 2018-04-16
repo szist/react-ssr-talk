@@ -1,8 +1,8 @@
 // @flow
 
-import React from "react";
+import React from 'react'
 
-import s from "./DefaultError.pcss";
+import s from './DefaultError.pcss'
 
 const DefaultError = ({ onClose }) => {
   return (
@@ -10,7 +10,7 @@ const DefaultError = ({ onClose }) => {
       <h1>Error</h1>
       <h3>Something went wrong</h3>
     </div>
-  );
-};
+  )
+}
 
-export default DefaultError;
+export default DefaultError

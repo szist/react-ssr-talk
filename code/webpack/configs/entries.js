@@ -1,9 +1,9 @@
 export default function entries({ entry, hot, target, vendor }) {
   return {
     entry: {
-      ...(target === "web"
+      ...(target === 'web'
         ? {
-            app: [entry, ...(hot ? ["webpack-hot-middleware/client"] : [])],
+            app: [entry, ...(hot ? ['webpack-hot-middleware/client'] : [])],
             ...(vendor ? { vendor } : {})
           }
         : {
@@ -11,5 +11,5 @@ export default function entries({ entry, hot, target, vendor }) {
             server: entry
           })
     }
-  };
+  }
 }
