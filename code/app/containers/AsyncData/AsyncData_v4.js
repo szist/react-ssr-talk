@@ -1,7 +1,7 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import Metadata from 'components/Metadata'
 import Loading from 'components/Loading'
+import { withJob } from 'react-jobs'
 import { TIMEOUT } from 'utils/constants'
 
 function loadAsyncData() {
@@ -15,34 +15,16 @@ function loadAsyncData() {
   })
 }
 
+const _AsyncPart = ({ jobResult }) => <div>{jobResult}</div>
+
+const AsyncPart = withJob({
+  LoadingComponent: Loading,
+  work: props => loadAsyncData(),
+  shouldWorkAgain: (nextProps, prevProps, status) => true,
+  serverMode: 'resolve' // or 'defer'
+})(_AsyncPart)
+
 class AsyncData extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: null
-    }
-    this.bootstrap()
-  }
-
-  static KEY = Symbol('AsyncData')
-
-  bootstrap() {
-    const { staticContext } = this.props
-    if (staticContext) {
-      const { [AsyncData.KEY]: data = null } = staticContext.data
-      if (data) {
-        // eslint-disable-next-line
-        this.state.data = data
-      } else {
-        staticContext.bootstrap.push([AsyncData.KEY, loadAsyncData()])
-      }
-    }
-  }
-
-  componentDidMount() {
-    loadAsyncData().then(data => this.setState({ data }))
-  }
-
   render() {
     return (
       <div>
@@ -53,10 +35,10 @@ class AsyncData extends React.PureComponent {
           <br />
           I also make server-side rendering hard.
         </p>
-        <div>{this.state.data ? this.state.data : <Loading />}</div>
+        <AsyncPart />
       </div>
     )
   }
 }
 
-export default withRouter(AsyncData)
+export default AsyncData

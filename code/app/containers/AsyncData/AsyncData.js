@@ -1,6 +1,7 @@
 import React from 'react'
 import Metadata from 'components/Metadata'
 import Loading from 'components/Loading'
+import { TIMEOUT } from 'utils/constants'
 
 function loadAsyncData() {
   const asyncData = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -9,7 +10,7 @@ function loadAsyncData() {
     esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
     culpa qui officia deserunt mollit anim id est laborum.`
   return new Promise(resolve => {
-    setTimeout(() => resolve(asyncData), 3000)
+    setTimeout(() => resolve(asyncData), TIMEOUT)
   })
 }
 

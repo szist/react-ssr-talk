@@ -8,6 +8,7 @@ import configureStore from 'configureStore'
 import CatchError from 'containers/CatchError'
 import App from 'containers/App/App_v3'
 import Html from './Html'
+import timeIt from './timings'
 
 // $FlowIgnore this gets dynamically created by the build process
 const assets = require('./assets')
@@ -16,6 +17,7 @@ export default async (req, res) => {
   const store = configureStore()
 
   try {
+    timeIt('start')
     const routerContext = { data: {}, bootstrap: [] }
     const app = (
       <CatchError>
@@ -29,13 +31,17 @@ export default async (req, res) => {
 
     // 1st render to bootstrap data
     renderToString(app)
+    timeIt('1st render')
     const values = await Promise.all(routerContext.bootstrap.map(([key, promise]) => promise))
     routerContext.data = _.fromPairs(
       _.zip(routerContext.bootstrap.map(([key, promise]) => key), values)
     )
 
+    timeIt('data loaded')
     // 2nd render to render with all data needed
     const body = renderToString(app)
+
+    timeIt('2nd render')
 
     if (routerContext.status === 404) {
       res.status(404) // Not found page should be rendered by the router
@@ -55,6 +61,8 @@ export default async (req, res) => {
     const html = renderToStaticMarkup(
       <Html assets={initialAssets} initialState={store.getState()} body={body} />
     )
+
+    timeIt('html')
 
     return res.send(`<!doctype html>\n${html}`)
   } catch (error) {

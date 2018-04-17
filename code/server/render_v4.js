@@ -1,34 +1,49 @@
 import React from 'react'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
+import asyncBootrapper from 'react-async-bootstrapper'
+import { AsyncComponentProvider, createAsyncContext } from 'react-async-component'
+import { JobProvider, createJobContext } from 'react-jobs'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
 
 import configureStore from 'configureStore'
 import CatchError from 'containers/CatchError'
-import App from 'containers/App/App'
-import Html from './Html'
+import App from 'containers/App/App_v4'
+import Html from './Html_v4'
 import timeIt from './timings'
 
 // $FlowIgnore this gets dynamically created by the build process
 const assets = require('./assets')
 
 export default async (req, res) => {
-  timeIt('start')
   const store = configureStore()
 
   try {
+    timeIt('start')
     const routerContext = {}
+    const jobContext = createJobContext()
+    const asyncContext = createAsyncContext()
     const app = (
       <CatchError>
-        <Provider store={store} key="provider">
-          <StaticRouter context={routerContext} location={req.url}>
-            <App />
-          </StaticRouter>
-        </Provider>
+        <AsyncComponentProvider asyncContext={asyncContext}>
+          <JobProvider jobContext={jobContext}>
+            <Provider store={store} key="provider">
+              <StaticRouter context={routerContext} location={req.url}>
+                <App />
+              </StaticRouter>
+            </Provider>
+          </JobProvider>
+        </AsyncComponentProvider>
       </CatchError>
     )
+
+    // 1st pass bootstrap data
+    await asyncBootrapper(app)
+    timeIt('bootstrapped')
+
+    // 2nd render to render with all data needed
     const body = renderToString(app)
-    timeIt('rendered')
+    timeIt('render')
 
     if (routerContext.status === 404) {
       res.status(404) // Not found page should be rendered by the router
@@ -46,10 +61,16 @@ export default async (req, res) => {
       css: [assets['app.css']]
     }
     const html = renderToStaticMarkup(
-      <Html assets={initialAssets} initialState={store.getState()} body={body} />
+      <Html
+        assets={initialAssets}
+        initialState={store.getState()}
+        asyncState={asyncContext.getState()}
+        jobsState={jobContext.getState()}
+        body={body}
+      />
     )
-
     timeIt('html')
+
     return res.send(`<!doctype html>\n${html}`)
   } catch (error) {
     console.error(error) // eslint-disable-line no-console
