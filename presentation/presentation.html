@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Title</title>
+  <title>SSR rendering react</title>
   <meta charset="utf-8">
   <style>
     @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -55,6 +55,10 @@ class: center, middle
 2. Why?
 3. How?
 
+--
+4. Problems
+![problems](./images/problems.jpg)
+
 ---
 
 # Modern web?
@@ -72,26 +76,25 @@ Javascript paratko.
 
 ---
 
-# TODO simple react without SSR
-
----
-
 # Why not?
 
-**SEO** - from google guidelines:
+**SEO?** - from google guidelines:
 _"The Google indexing system renders a web page
 as the user would see it, including images, CSS, and
-JavaScript files."_ [link](https://support.google.com/webmasters/answer/35769?hl=en)
+JavaScript files."_ ([link](https://support.google.com/webmasters/answer/35769?hl=en))
 
-Search Console - **Fetch as Google** [link](https://support.google.com/webmasters/answer/6066468?visit_id=1-636592885515277953-4188022132&rd=1)
-
-* TODO show the example of v1 live*
+Search Console - **Fetch as Google** ([link](https://support.google.com/webmasters/answer/6066468?visit_id=1-636592885515277953-4188022132&rd=1))
 
 ---
 
 # Why then?
 
-* OpenGraph bots - baaad - TODO show example of v1 live on now
+* SEO
+* OpenGraph bots - bad ([link](https://developers.facebook.com/tools/debug/sharing/))
+
+???
+Show live example
+https://developers.facebook.com/tools/debug/sharing/
 
 --
 * Time-to Interactive
@@ -114,18 +117,134 @@ PWA usually just fancy word for having a service-worker to have full control ove
 
 ---
 
+# Server-side rendering
+
+```javascript
+import { renderToString, renderToStaticMarkup } from 'react-dom/server'
+...
+const body = renderToString(app)
+const html = renderToStaticMarkup(
+  <Html
+    assets={initialAssets}
+    initialState={store.getState()}
+    body={body} />
+)
+```
+
+---
+
+# Server-side rendering - client
+
+```javascript
+const element = document.getElementById('app')
+hydrate(app, element)
+```
+
+---
+
+# Server-side rendering components
+
+ * `constructor`
+
+--
+![web](./images/check.png)
+ * `static getDerivedStateFromProps`
+
+--
+![web](./images/cross.png)
+ * `UNSAFE_componentWillMount`
+ 
+--
+![web](./images/check.png)
+ * `componentDidMount`
+ 
+--
+![web](./images/cross.png)
+ * `UNSAFE_componentWillRecieveProps`
+ 
+--
+![web](./images/cross.png)
+ * `shouldComponentUpdate`
+ 
+--
+![web](./images/cross.png)
+ * `UNSAFE_componentWillUpdate`
+ 
+--
+![web](./images/cross.png)
+ * `getSnapshotBeforeUpdate`
+ 
+--
+![web](./images/cross.png)
+ * `render`
+ 
+--
+![web](./images/check.png)
+ * `componentDidUpdate`
+ 
+--
+![web](./images/cross.png)
+ * `componentWillUnmount`
+ 
+--
+![web](./images/cross.png)
+ * `componentDidCatch`
+ 
+--
+![web](./images/cross.png)
+
+---
+
+# Example app
+
+* react
+* react-helmet
+* react-router v4
+
+---
+
+# Problems?
+
+* routing
+
+???
+mention previous routes
+
+--
+* async data
+
+--
+* code splitting
+
+--
+* anything that requires real dom or window - like media queries
+
+
+---
+
 # Versions
 
 * Version 1 - no SSR
 
 --
-* Version 2 - simple SSR
+* Version 2 - simple SSR, media queries
 
 --
-* Version 3 - using staticContext
+* Version 3 - using double render staticContext
 
---- 
+--
+* Version 4 - using a bootstrapper
+
+---
+
 class: center, middle
+
+# Future?
+
+---
+
+class: center, middle
+
 # Thank you !
 
     </textarea>

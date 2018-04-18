@@ -9,6 +9,7 @@ if (process.argv.includes('--production')) {
 if (process.argv.includes('--staging')) {
   mode = 'staging'
 }
+console.log('Buildmode', mode)
 const clientConfig = makeConfig({ ...clientOptions, mode })
 const serverConfig = makeConfig({ ...serverOptions, mode })
 

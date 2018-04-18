@@ -13,7 +13,8 @@
   "scripts": {
     "clean": "rm -rf build/*",
     "dev": "npm run clean && node -r @babel/register dev",
-    "build": "npm run clean && node -r @babel/register build"
+    "build": "npm run clean && VERSION=v2 node -r @babel/register build --production",
+    "start": "node build/server"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
@@ -82,6 +83,7 @@
     "react-helmet": "^5.2.0",
     "react-jobs": "^1.0.0",
     "react-loadable": "^5.3.1",
+    "react-media": "^1.8.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "redbox-react": "^1.5.0",
