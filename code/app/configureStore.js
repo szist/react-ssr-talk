@@ -23,7 +23,11 @@ export default function configureStore(initialState = {}) {
       : compose
   /* eslint-enable */
 
-  const store = createStore(createReducer(), composeEnhancers(applyMiddleware(...middlewares)))
+  const store = createStore(
+    createReducer(),
+    initialState,
+    composeEnhancers(applyMiddleware(...middlewares))
+  )
 
   /* eslint-env node */
   if (module.hot && typeof module.hot.accept === 'function') {
